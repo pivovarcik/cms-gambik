@@ -1,15 +1,10 @@
 <?php
 
 /**
- *
+ * Třída zabezpečuje aktualizaci datového modelu aplikace
  *
  * @version $Id$
- * @copyright 2011
- */
-
-/**
- * fIX utf8_unicode_ci
- *
+ * @copyright Rudolf Pivovarcik - info@pivovarcik.cz
  */
 class GModel{
 	/**
@@ -32,10 +27,8 @@ class GModel{
 	private $dbShcema = array();
 	function __construct(){
 		$this->install_date = date("Y-m-d H:i:s");
-		//$this->version_date = date("2011-12-07");
-		//$this->version = 4.50;
-		$this->version_date = date("2016-07-04");
-		$this->version = 4.993;
+		$this->version_date = date("2016-07-19");
+		$this->version = 4.994;
 		$this->upsize = 12;
 		$this->url_home = "http://" . $_SERVER["HTTP_HOST"] . substr($_SERVER["REQUEST_URI"],0,strlen($_SERVER["REQUEST_URI"])-11);
 		$this->url_home_rel = substr($_SERVER["REQUEST_URI"],0,strlen($_SERVER["REQUEST_URI"])-11);
@@ -1437,7 +1430,7 @@ $data["definition"] = '<definition>
 		$demodata["COMPANY_ADRESS2"] = "";
 		$demodata["CONTACT_PERSON"] = "";
 		$demodata["CONTACT_EMAIL"] = "";
-		$demodata["LICENCE_KEY"] = LICENCE_KEY;
+		$demodata["LICENCE_KEY"] = "demo";
 		$demodata["SERVER_GOOGLEBOT"] = "index,follow";
 		$demodata["SERVER_AUTHOR"] = "CMS Gambík";
 		$demodata["VERSION_DATE"] = $this->version_date;
@@ -3682,4 +3675,3 @@ zasíláme potrvrzení o přijetí objednávky.";
  (68, 0, '2014-12-27 00:29:44', '2014-12-27 00:29:44', 'Zpět do obchodu', 6, 68);
 
  * */
-?>
