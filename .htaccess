@@ -1,0 +1,56 @@
+#Options +SymLinksIfOwnerMatch
+#php_flag magic_quotes_gpc off
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule  ^sitemap\.xml$ %{DOCUMENT_ROOT}/export/sitemap.php [L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule  ^robots\.txt$ %{DOCUMENT_ROOT}/export/robots.php [L]
+
+	# vše pøesmìrovat na www
+	#RewriteCond %{HTTP_HOST} ^xxxxx.cz [nc]
+	#RewriteRule (.*) http://www.xxxx.cz/$1 [R=301,L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([a-z]{2})/$ %{DOCUMENT_ROOT}/index.php?url=&lang=$1 [L,QSA,T=application/x-httpd-php]
+
+	# Produkty
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([a-z]{2})/(.*)/([0-9]+)-(.*).html$ %{DOCUMENT_ROOT}/index.php?url=eshop/$2&id=$3&lang=$1 [L,QSA,T=application/x-httpd-php]
+
+		RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)/([0-9]+)-(.*).html$ %{DOCUMENT_ROOT}/index.php?url=eshop/$1&id=$2 [L,QSA,T=application/x-httpd-php]
+
+	# èlánky
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([a-z]{2})/(.*)/(.*).html$ %{DOCUMENT_ROOT}/index.php?url=$2&item=$3&lang=$1 [L,QSA,T=application/x-httpd-php]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([a-z]{2})/(.*).html$ %{DOCUMENT_ROOT}/index.php?item=$2&url=root&lang=$1 [L,QSA,T=application/x-httpd-php]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([a-z]{2})/$ %{DOCUMENT_ROOT}/index.php?url=root&lang=$1 [L,QSA,T=application/x-httpd-php]
+
+
+
+
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)/(.*).html$ %{DOCUMENT_ROOT}/index.php?url=$1&item=$2&lang=cs [L,QSA,T=application/x-httpd-php]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*).html$ %{DOCUMENT_ROOT}/index.php?item=$1 [L,QSA,T=application/x-httpd-php]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([a-z]{2})/(.*)$ %{DOCUMENT_ROOT}/index.php?url=$2&lang=$1 [L,QSA,T=application/x-httpd-php]
+
+
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)$ %{DOCUMENT_ROOT}/index.php?url=$1&lang=cs [L,QSA]
+
+
+
+</IfModule>

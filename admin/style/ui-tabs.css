@@ -1,0 +1,166 @@
+.tabs-min {
+	background: transparent;
+	border: none;
+	float:left;
+	width: 750px;
+}
+.tabs-min .ui-widget-header {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #D8D8D8;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+}
+.tabs-min .ui-tabs-nav .ui-state-default {
+	background: transparent;
+	border: none;
+}
+.tabs-min .ui-tabs-nav .ui-state-active {
+	background: transparent url(images/uiTabsArrow.png) no-repeat bottom center;
+	border: none;
+}
+.tabs-min .ui-tabs-nav .ui-state-default a {
+	color: #c0c0c0;
+	color: #444444;
+}
+.tabs-min .ui-tabs-nav .ui-state-active a {
+	color: #48A5D3;
+}
+
+.tabs-min .ui-tabs-nav .ui-tabs-anchor {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+#tabs-nested-left .ui-widget {
+	font-family: Arial,sans-serif;
+}
+
+#tabs-nested-left > .ui-tabs-panel {
+	padding: 0em;
+}
+
+
+#tabs-nested-left .ui-widget-content {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: 0 none;
+	color: #222222;
+}
+
+#tabs-nested-left {
+	padding-left: 22.5em;
+	position: relative;
+}
+
+#tabs-nested-left .ui-tabs {
+	position: static;
+}
+
+#tabs-nested-left .ui-tabs-nav {
+	bottom: 0.25em;
+	left: 0;
+	padding: 0.2em 0;
+	position: absolute;
+	top: 0;
+	width: 20em;
+}
+#tabs-nested-left .ui-tabs-nav li.ui-state-default {
+	right: 1px;
+	width: 100%;
+	border: 0 none;
+	-moz-border-radius: 0;
+	-webkit-border-radius:0;
+	border-radius: 0;
+	border-left: 2px solid #c4d5df;
+	overflow: visible;
+}
+#tabs-nested-left .ui-tabs-nav li.ui-tabs-selected, #tabs-nested-left .ui-tabs-nav li.ui-state-active {
+	border-left: 0 none;
+	border-right: 1px solid transparent;
+
+}
+#tabs-nested-left .ui-tabs-nav li a {
+	text-align: left;
+}
+#tabs-nested-left > div {
+	/*	height: 10em;
+	overflow: auto;*/
+}
+
+#tabs-nested-left .ui-widget-header {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: 0 none;
+}
+
+
+
+#tabs-nested-left .ui-state-default, #tabs-nested-left .ui-widget-content .ui-state-default, #tabs-nested-left .ui-widget-header .ui-state-default {
+	background: none repeat scroll 0 0 #f0f6fa;
+	border-left: 2px solid #c4d5df;
+	color: #557386;
+	display: block;
+	font-size: 13px;
+}
+
+
+
+#tabs-nested-left .ui-state-active a, #tabs-nested-left .ui-state-active a:link, #tabs-nested-left .ui-state-active a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+
+#tabs-nested-left li {
+	margin: 0 0 1px 0;
+	position: relative;
+}
+
+
+#tabs-nested-left .ui-state-active:after {
+	border-bottom: 6px solid transparent;
+	border-left: 6px solid #169ef4;
+	border-top: 6px solid transparent;
+	content: "";
+	display: inline-block;
+	position: absolute;
+	right: -7px;
+	top: 13px;
+}
+
+
+#tabs-nested-left .ui-state-hover, #tabs-nested-left .ui-widget-content .ui-state-hover,
+#tabs-nested-left .ui-widget-header .ui-state-hover, #tabs-nested-left .ui-state-focus, #tabs-nested-left .ui-widget-content .ui-state-focus,
+ #tabs-nested-left .ui-widget-header .ui-state-focus {
+	background: none repeat-x scroll 0 0 #e0eaf0;
+	border: 0 none;
+	color: #212121;
+	font-weight: normal;
+}
+#tabs-nested-left  .ui-state-active, #tabs-nested-left .ui-widget-content .ui-state-active, #tabs-nested-left .ui-widget-header .ui-state-active {
+	background: none repeat scroll 0 0 #169ef4;
+	border: 0 none;
+	color: #fff;
+	font-weight: normal;
+}
+
+
+#tabs-nested-left .ui-tabs .ui-tabs-nav li a {
+	cursor: pointer;
+	display: block;
+	float: none;
+	font-weight: normal;
+	padding: 10px 15px;
+	text-decoration: none;
+}
+
+
+#tabs-nested-left .ui-tabs-nav .ui-state-active a {
+	color: #fff;
+}

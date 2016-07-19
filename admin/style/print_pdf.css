@@ -1,0 +1,75 @@
+body {
+height: 1024px;
+width:728px;color: #000;
+font-family: arial;
+font-size: 11px;
+}
+h2 {
+font-size:14px;
+margin:0;
+display:inline;
+}
+
+h3 {
+font-size:14px;
+margin:0;
+display:inline;
+}
+
+table { border-collapse:collapse;width:100%;
+margin-top:10px;
+font-family: arial;font-size: 11px;
+}
+thead { border-width: 2px 0 2px 0;border-style:solid;}
+td, th {
+border: 1px solid #000; vertical-align:middle;padding:2px;
+font-family: tahoma;
+}
+th {
+
+background-color:#E6E6E6;
+}
+.zahlavi thead, .zahlavi tr th, .zahlavi td, .zahlavi tr td {
+border:0px none;
+}
+
+#data_grid thead, #data_grid tr th, #data_grid td, #data_grid tr td {
+border:0px none;
+}
+#data_grid tr th {
+padding: 6px;
+}
+#data_grid tr.rozpis td {
+border-top: 1px solid #E6E6E6;
+}
+
+#data_grid2 {
+	width:30%;
+}
+#data_grid2 thead, #data_grid2 tr th, #data_grid2 td, #data_grid2 tr td {
+	border:0px none;
+}
+
+
+
+.table_footer thead, .table_footer tr th, .table_footer td, .table_footer tr td {
+border:0px none;
+}
+
+.column-price {
+    text-align: right;
+}
+td {
+padding:3px;
+}
+
+#data_grid2 tr th {
+padding:0 6px;
+	font-weight:normal;
+	background-color:transparent;
+	border-bottom: 1px solid #E6E6E6; vertical-align:middle;
+}
+
+#data_grid2 tr td {
+	padding:6px;
+}

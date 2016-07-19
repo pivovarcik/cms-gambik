@@ -1,0 +1,122 @@
+
+.page-sidebar-menu ul {
+	margin:0;
+}
+.page-sidebar-menu ul > li > a {
+	border: 0 none;
+	display: block;
+	font-size: 14px;
+	font-weight: 300;
+	margin: 0;
+	padding: 10px 15px;
+	position: relative;
+	text-decoration: none;
+	border-top: 1px solid #FFFFFF !important;
+	color: #000000;
+	font-weight: 400;
+}
+.page-sidebar-menu i {
+	font-size:20px;
+}
+.page-sidebar-menu ul > li > a.navSelected2 {
+	background:#48A5D3;
+	color:#fff;
+}
+.page-sidebar-menu ul > li > a:hover {
+	background:silver;
+	color:#000000;
+}
+
+.page-sidebar-menu ul i {
+	padding-right:5px;
+}
+.page-sidebar-closed .page-sidebar-menu i {
+	padding-right:0;
+}
+
+.page-sidebar-menu ul > li > ul > li > a {
+	padding-left: 25px;
+}
+
+.page-sidebar-fixed .page-sidebar {
+	position:fixed;
+	width: 220px;
+
+}
+.page-sidebar {
+	background-color: #E7E7E7;
+	/*float: left;*/
+	padding-top: 15px;
+	width: 100%;
+	top: 42px;
+	z-index: 8;
+	min-height: 100%;
+}
+
+.page-sidebar nav {
+
+}
+
+header .sidebar-toggler {
+	display:none;
+	position:absolute;
+	top:5px;
+	right:0;
+}
+.slimScrollDiv {
+	margin-bottom: 50px;
+	padding-bottom: 500px;
+}
+/*
+.slim-sidebar {
+width:35px;
+position:absolute;
+}*/
+
+.page-sidebar-closed .page-sidebar {
+	width: 35px;
+}
+.page-sidebar-closed .page-content,  .page-sidebar-hover-on .page-content{
+	margin-left: 35px ;
+}
+
+.page-sidebar-closed .page-sidebar-menu ul > li > a span, .page-sidebar-hovering .page-sidebar-menu ul > li > a span {
+	display:none;
+}
+
+
+.page-sidebar-closed .page-sidebar-menu ul > li > a {
+	padding-left: 4px;
+}
+
+.page-sidebar-closed .page-sidebar-menu ul > li > ul {
+	display:none;
+}
+
+.slim-sidebar .sidebar-fix {
+	position:fixed;
+}
+
+
+.sidebar-toggler {
+	background: none repeat scroll 0 0 #c0c0c0;
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 18px;
+	height: 30px;
+	line-height: 30px;
+	margin-bottom: 10px;
+	margin-left: 175px;
+	margin-right: 10px;
+	text-align: center;
+	vertical-align: middle;
+	width: 30px;
+}
+
+.sidebar-toggler i {
+	line-height: 30px;
+}
+
+.page-sidebar-closed .sidebar-toggler {
+	margin-left: 2px;
+}

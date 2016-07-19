@@ -1,0 +1,20 @@
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule  ^style/editor\.css$ %{DOCUMENT_ROOT}/admin/editor_css.php [L]
+
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)/(.*).html$ %{DOCUMENT_ROOT}/admin/index.php?url=$1&item=$2&lang=cs [L,QSA,T=application/x-httpd-php]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*).html$ %{DOCUMENT_ROOT}/admin/index.php?item=$1 [L,QSA,T=application/x-httpd-php]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)$ %{DOCUMENT_ROOT}/admin/index.php?url=$1 [L,QSA]
+
+
+
+</IfModule>
