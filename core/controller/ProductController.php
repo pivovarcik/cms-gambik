@@ -1302,6 +1302,12 @@ if ($list[$i]->bazar == 1) {
 			$data[$name] = $postdata[$name];
 		}
 
+
+		$name = 'nakupni_cena';
+		if (array_key_exists($name, $postdata)) {
+			$data[$name] = $postdata[$name];
+		}
+
 		//print_r($data);
 		return $data;
 	}

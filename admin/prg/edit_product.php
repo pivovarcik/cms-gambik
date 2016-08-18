@@ -77,7 +77,7 @@ include PATH_TEMP . "admin_body_header.php";
 ?>
 
 
-<form class="standard_form" enctype="application/x-www-form-urlencoded" method="POST">
+<form class="" enctype="application/x-www-form-urlencoded" method="POST">
 
 <div class="page-header">
 <h1>

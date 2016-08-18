@@ -42,97 +42,204 @@ class ProductTabs extends PageTabs {
 		$languageList = $this->languageList;
 
 		$contentMain = '';
-		$contentMain = $form->getElement("cislo")->render() . '<p class="desc"></p><br />';
-
-		$first = true;foreach ($languageList as $key => $val){ if ($first) {$style="display:block;";$first = false;} else { $style="display:none;";}
-			$contentMain .='<div class="lang lang_' .$val->code. '" style="' .$style. '">' . $form->getElement("title_$val->code")->render() . '</div>';
-		}
-		$contentMain .='<p class="desc">Výstižný název článku - Povinný údaj.</p>
-		<br />';
-
-
-		$first = true;foreach ($languageList as $key => $val){ if ($first) {$style="display:block;";$first = false;} else { $style="display:none;";}
-			$contentMain .='<div class="lang lang_' .$val->code. '" style="' .$style. '">' . $form->getElement("perex_$val->code")->render() . '</div>';
-
-		}
-		$contentMain .='<p class="desc"></p><br />';
-
-		$contentMain .= $form->getElement("code02")->render() . '
-		<p class="desc"></p><br />';
-
-		$contentMain .= $form->getElement("code01")->render() . '
-		<p class="desc"></p><br />';
-
-		$contentMain .= $form->getElement("qty")->render() . ' ' . $form->getElement("hl_mj")->render() . '
-		<p class="desc"></p><br />';
-
-		//	$contentMain .= '<hr />';
-		$eshopSettings = G_EshopSetting::instance();
 
 
 
-		if ($eshopSettings->get("PLATCE_DPH") == 0) {
-			$contentMain .= $form->getElement("prodcena_sdph")->render();
-			$contentMain .= '<p class="desc"></p><br />';
-		//	$contentMain .= ' ' . $form->getElement("dph_id")->render();
-		} else {
-			if ($eshopSettings->get("PRICE_TAX") == 0) {
-
-				$contentMain .= $form->getElement("prodcena")->render();
-				$contentMain .= ' ' . $form->getElement("dph_id")->render(); // . ' '.number_format($form->page->cena_bezdph, 2, ',', ' ') . ' + ' .number_format($form->page->castka_dph, 2, ',', ' ') . ' = <strong>' . number_format($form->page->cena_sdph, 2, ',', ' '). '&nbsp;Kč</strong>
-				$contentMain .= '<p class="desc"></p><br />';
+		$contentMain .='<fieldset class="well">';
 
 
-				$contentMain .= $form->getElement("prodcena_sdph")->render() . ' (Cena bude automaticky dopočtena)
-				<p class="desc"></p><br />';
+		$contentMain .='<div class="row">';
+
+			$contentMain .='<div class="col-sm-4">';
+			$contentMain .= $form->getElement("cislo")->render();
+			$contentMain .='</div>';
+
+			$contentMain .='<div class="col-sm-8">';
+			$first = true;foreach ($languageList as $key => $val){ if ($first) {$style="display:block;";$first = false;} else { $style="display:none;";}
+				$contentMain .='<div class="lang lang_' .$val->code. '" style="' .$style. '">' . $form->getElement("title_$val->code")->render() . '</div>';
+			}
+		//	$contentMain .='<p class="desc">Výstižný název článku - Povinný údaj.</p>';
+			$contentMain .='</div>';
+
+		$contentMain .='</div>';
+
+
+		$contentMain .='<div class="row">';
+
+			$contentMain .='<div class="col-sm-12">';
+
+		//	$contentMain .='<div class="col-sm-8">';
+			$first = true;foreach ($languageList as $key => $val){ if ($first) {$style="display:block;";$first = false;} else { $style="display:none;";}
+				$contentMain .='<div class="lang lang_' .$val->code. '" style="' .$style. '">' . $form->getElement("perex_$val->code")->render() . '</div>';
+			}
+
+			$contentMain .='</div>';
+
+		$contentMain .='</div>';
+
+
+		$contentMain .='<div class="row">';
+
+			$contentMain .='<div class="col-sm-6">';
+			$contentMain .= $form->getElement("code02")->render();
+			$contentMain .='</div>';
+
+			$contentMain .='<div class="col-sm-6">';
+			$contentMain .= $form->getElement("code01")->render();
+			$contentMain .='</div>';
+
+		$contentMain .='</div>';
+
+		$contentMain .='</fieldset>';
+
+
+		$contentMain .='<fieldset class="well">';
+
+		$contentMain .='<div class="row">';
+
+			$contentMain .='<div class="col-sm-3">';
+			$contentMain .= $form->getElement("qty")->render();
+			$contentMain .='</div>';
+
+			$contentMain .='<div class="col-sm-3">';
+			$contentMain .= $form->getElement("hl_mj")->render();
+			$contentMain .='</div>';
+
+				$eshopSettings = G_EshopSetting::instance();
+			if ($eshopSettings->get("PLATCE_DPH") == 0) {
+				$contentMain .='<div class="col-sm-6">';
+				$contentMain .= $form->getElement("prodcena_sdph")->render();
+				$contentMain .='</div>';
 
 			} else {
-				$contentMain .= $form->getElement("prodcena_sdph")->render();
-				$contentMain .= ' ' . $form->getElement("dph_id")->render(); // . ' '.number_format($form->page->cena_bezdph, 2, ',', ' ') . ' + ' .number_format($form->page->castka_dph, 2, ',', ' ') . ' = <strong>' . number_format($form->page->cena_sdph, 2, ',', ' '). '&nbsp;Kč</strong>
-				$contentMain .= '<p class="desc"></p><br />';
+				if ($eshopSettings->get("PRICE_TAX") == 0) {
+
+					$contentMain .='<div class="col-sm-6">';
+
+					$contentMain .='<div class="col-sm-4">';
+					$contentMain .= $form->getElement("prodcena")->render();
+					$contentMain .='</div>';
+
+					$contentMain .='<div class="col-sm-4">';
+					$contentMain .= $form->getElement("dph_id")->render();
+					$contentMain .='</div>';
+
+					$contentMain .='<div class="col-sm-4">';
+					$contentMain .= $form->getElement("prodcena_sdph")->render();
+					$contentMain .='</div>';
+
+					$contentMain .='</div>';
 
 
-				$contentMain .= $form->getElement("prodcena")->render() . ' (Cena bude automaticky dopočtena)
-				<p class="desc"></p><br />';
+				} else {
+
+
+					$contentMain .='<div class="col-sm-6">';
+
+					$contentMain .='<div class="col-sm-4">';
+					$contentMain .= $form->getElement("prodcena_sdph")->render();
+					$contentMain .='</div>';
+
+					$contentMain .='<div class="col-sm-4">';
+					$contentMain .= $form->getElement("dph_id")->render();
+					$contentMain .='</div>';
+
+					$contentMain .='<div class="col-sm-4">';
+					$contentMain .= $form->getElement("prodcena")->render();
+					$contentMain .='</div>';
+
+					$contentMain .='</div>';
+				}
 			}
-		}
-
-		$contentMain .= $form->getElement("sleva")->render() . ' ' . $form->getElement("druh_slevy")->render() . '
-		<p class="desc"></p><br />';
-
-		/*	$contentMain .= $form->getElement("cenik_id")->render() . '
-		   <p class="desc"></p><br />';*/
-
-		//$contentMain .= '<hr />';
-		$contentMain .= $form->getElement("bezna_cena")->render() . '
-		<p class="desc">Škrtnutá cena</p><br />';
-
-		/*	$contentMain .= $form->getElement("dostupnost")->render() . '
-		   <p class="desc"></p><br />';*/
-		$contentMain .= $form->getElement("dostupnost_id")->render() . '
-		<p class="desc"></p><br />';
-		$contentMain .= $form->getElement("vyrobce_id")->render() . '
-		<p class="desc"></p><br />';
-
-		$contentMain .= $form->getElement("category_id")->render() . '
-		<p class="desc"></p><br />';
-		$contentMain .= $form->getElement("skupina_id")->render() . '
-		<p class="desc"></p><br />';
 
 
-		$contentMain .= $form->getElement("zaruka_id")->render() . '
-		<p class="desc"></p><br />';
+		$contentMain .='</div>';
 
 
 
-		$contentMain .= '<div class="checkbox">' . $form->getElement("aktivni")->render() . '</div>
-		<p class="desc"></p><br />';
+		$contentMain .='<div class="row">';
 
-		$contentMain .= '<div class="checkbox">' . $form->getElement("bazar")->render() . '</div>
-		<p class="desc"></p><br />';
+			$contentMain .='<div class="col-sm-3">';
+			$contentMain .= $form->getElement("sleva")->render();
+			$contentMain .='</div>';
 
-		$contentMain .= '<div class="checkbox">' . $form->getElement("neexportovat")->render() . '</div>
-		<p class="desc"></p><br />';
+			$contentMain .='<div class="col-sm-3">';
+			$contentMain .= $form->getElement("druh_slevy")->render();
+			$contentMain .='</div>';
+
+
+			$contentMain .='<div class="col-sm-3">';
+			$contentMain .= $form->getElement("bezna_cena")->render();
+			$contentMain .= '<p class="desc">Škrtnutá cena</p>';
+			$contentMain .='</div>';
+
+			$contentMain .='<div class="col-sm-3">';
+			$contentMain .= $form->getElement("nakupni_cena")->render();
+			$contentMain .= '<p class="desc">Dodavatelská cena</p>';
+			$contentMain .='</div>';
+
+			$contentMain .='</div>';
+
+		$contentMain .='</fieldset>';
+
+
+
+
+
+
+
+
+
+		$contentMain .='<div class="row">';
+
+			$contentMain .='<div class="col-sm-6">';
+			$contentMain .= $form->getElement("category_id")->render();
+			$contentMain .='</div>';
+
+			$contentMain .='<div class="col-sm-6">';
+			$contentMain .= $form->getElement("skupina_id")->render();
+			$contentMain .='</div>';
+
+		$contentMain .='</div>';
+
+
+
+
+
+
+		$contentMain .='<div class="row">';
+
+		$contentMain .='<div class="col-sm-4">';
+		$contentMain .= $form->getElement("vyrobce_id")->render();
+		$contentMain .='</div>';
+
+		$contentMain .='<div class="col-sm-4">';
+		$contentMain .= $form->getElement("dostupnost_id")->render();
+		$contentMain .='</div>';
+
+		$contentMain .='<div class="col-sm-4">';
+		$contentMain .= $form->getElement("zaruka_id")->render();
+		$contentMain .='</div>';
+
+		$contentMain .='</div>';
+
+		$contentMain .='<div class="row">';
+
+		$contentMain .='<div class="col-sm-4">';
+		$contentMain .= '<div class="checkbox">' . $form->getElement("aktivni")->render() . '</div>';
+		$contentMain .='</div>';
+
+		$contentMain .='<div class="col-sm-4">';
+		$contentMain .= '<div class="checkbox">' . $form->getElement("bazar")->render() . '</div>';
+		$contentMain .='</div>';
+
+		$contentMain .='<div class="col-sm-4">';
+		$contentMain .= '<div class="checkbox">' . $form->getElement("neexportovat")->render() . '</div>';
+		$contentMain .='</div>';
+
+		$contentMain .='</div>';
+
+
 
 
 
@@ -154,7 +261,7 @@ class ProductTabs extends PageTabs {
 		$eshopSettings = G_EshopSetting::instance();
 
 
-		$contentMain .= $form->getElement("netto")->render() . '
+		$contentParametry .= $form->getElement("netto")->render() . '
 		<p class="desc"></p><br />';
 
 

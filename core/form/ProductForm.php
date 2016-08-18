@@ -18,6 +18,7 @@ class ProductForm extends PageForm
 	function __construct()
 	{
 		parent::__construct("models_Products");
+		$this->setStyle(BootstrapForm::getStyle());
 	}
 	// načte datový model
 	public function loadPage($page_id = null)
@@ -306,6 +307,28 @@ class ProductForm extends PageForm
 		$this->addElement($elem);
 */
 
+		$name = "nakupni_cena";
+		$elem = new G_Form_Element_Text($name);
+		$elem->setAttribs(array("id"=>$name));
+		$value = $this->getPost($name, $product->$name);
+		$elem->setAttribs('value',$value);
+		$elem->setAttribs('label','Nákupní cena:');
+		$elem->setAttribs('class','textbox');
+		$elem->setAttribs('style','width:100px;text-align:right;');
+
+		$elem->setAttribs(array("is_money"=>true));
+		$this->addElement($elem);
+
+/*
+		if ($eshopSettings->get("PRICE_TAX") == 1) {
+			$elem->setAttribs('disabled',true);
+			$elem->setAttribs('class','textbox disabled');
+			$elem->setAttribs('style','width:100px;text-align:right;');
+		} else {
+
+			$elem->setAttribs('style','width:100px;text-align:right;font-weight:bold;');
+		}
+		*/
 
 
 

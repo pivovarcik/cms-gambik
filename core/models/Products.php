@@ -255,6 +255,7 @@ class models_Products extends models_Pages{
 			$obj->dph_id = $list[0]->dph_id;
 			$obj->nazev_dph = $list[0]->nazev_dph;
 			$obj->value_dph = $list[0]->value_dph;
+			$obj->nakupni_cena = $list[0]->nakupni_cena;
 
 			$obj->sleva = $list[0]->sleva;
 			$obj->sleva_label = $list[0]->sleva_label;

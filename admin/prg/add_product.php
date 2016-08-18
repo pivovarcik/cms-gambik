@@ -57,7 +57,7 @@ include PATH_TEMP . "admin_body_header.php";
 
 <section>
 <div class="wraper">
-	<form class="standard_form" id="requiredfield" method="post">
+	<form class="" id="requiredfield" method="post">
 
 <?php print $form->Result();?>
 <div class="page-header">
