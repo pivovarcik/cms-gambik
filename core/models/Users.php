@@ -202,6 +202,13 @@ class models_Users extends models_Pages{
 		}
 		*/
 
+
+
+		if(isset($params->like_email) && !empty($params->like_email))
+		{
+			$this->addWhere("t1.email like '" . $params->like_email . "%'");
+		}
+
 		$this->setOrderBy($params->getOrderBy(),'t1.naposledy DESC');
 
 

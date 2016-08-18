@@ -12,9 +12,9 @@ $cokoliv = '<script type="text/javascript">$(document).ready(function() {
 });</script>';
 $GHtml->setCokolivToHeader($cokoliv);
 
-$GHtml->setServerJs("/js/jquery.treeview/lib/jquery.cookie.js");
-$GHtml->setServerJs("/js/jquery.treeview/jquery.treeview.js");
-$GHtml->setServerCss("/js/jquery.treeview/jquery.treeview.css");
+$GHtml->setServerJs(URL_HOME_SITE . "js/jquery.treeview/lib/jquery.cookie.js");
+$GHtml->setServerJs(URL_HOME_SITE . "js/jquery.treeview/jquery.treeview.js");
+$GHtml->setServerCss(URL_HOME_SITE . "js/jquery.treeview/jquery.treeview.css");
 
 $GHtml->setPagetitle($pagetitle);
 $GHtml->setPagedescription($cat->pagedescription);
@@ -31,8 +31,8 @@ $pageButtons[] = '<a class="btn btn-sm btn-info" href="'.  URL_HOME . 'category/
 			<div class="panel-heading">Struktura rubrik</div>
 			<div class="panel-body">
 				<div id="treecontrol">
-				 	<a title="Collapse the entire tree below" href="#"><img src="/js/jquery.treeview/images/minus.gif" /> Sbalit vše</a>
-					<a title="Expand the entire tree below" href="#"><img src="/js/jquery.treeview/images/plus.gif" /> Rozbalit vše</a>
+				 	<a title="Collapse the entire tree below" href="#"><img src="<?php print URL_HOME_SITE; ?>js/jquery.treeview/images/minus.gif" /> Sbalit vše</a>
+					<a title="Expand the entire tree below" href="#"><img src="<?php print URL_HOME_SITE; ?>js/jquery.treeview/images/plus.gif" /> Rozbalit vše</a>
 				</div>
 				<div id="treedata" class="treeview"></div>
 

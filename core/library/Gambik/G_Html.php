@@ -509,10 +509,7 @@ class G_Html
 
 		}
 
-		$html_text .= '<script>
-		var urlBase = "' . URL_HOME_REL . '";
 
-		</script>'. PHP_EOL;
 
 		print $html_text;
 		return $html_text;
@@ -660,6 +657,11 @@ class G_Html
 
 			}
 
+
+			$html_text .= '<script>
+		var urlBase = "' . URL_HOME_REL . '";
+
+		</script>'. PHP_EOL;
 
 
 		$html_text .= $this->getHtmlJs();

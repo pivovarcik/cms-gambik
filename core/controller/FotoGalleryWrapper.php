@@ -7,10 +7,10 @@ class FotoGalleryWrapper extends G_Wrapper{
 		parent::__construct($radek);
 
 		$radek->dg_commands = array();
-		$command = new EditDataGridCommandModal(URL_HOME . "foto?do=ImageEdit&id=" . $radek->id);
+		$command = new EditDataGridCommandModal(URL_HOME . "admin/foto?do=ImageEdit&id=" . $radek->id);
 		array_push($radek->dg_commands, $command);
 
-		$command = new DeleteDataGridCommand(URL_HOME . "foto?do=ImageDelete&id=" . $radek->id);
+		$command = new DeleteDataGridCommand(URL_HOME . "admin/foto?do=ImageDelete&id=" . $radek->id);
 		array_push($radek->dg_commands, $command);
 
 		$radek->thumb = '';

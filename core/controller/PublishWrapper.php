@@ -10,11 +10,15 @@ class PublishWrapper extends G_Wrapper{
 
 	//	$radek->link_edit
 
-		$command = new stdClass();
+
+		$command = new EditDataGridCommand(URL_HOME . "post_edit?&id=" . $radek->id);
+		array_push($radek->dg_commands, $command);
+
+	/*	$command = new stdClass();
 		$command->link = URL_HOME . "post_edit?id=" . $radek->id;
 		$command->label = '<i class="fa fa-pencil"></i> editovat';
 	//	$command->name = "edit";
-		array_push($radek->dg_commands, $command);
+		array_push($radek->dg_commands, $command);*/
 		/*$command = new EditDataGridCommandModal(URL_HOME . "posts?do=ProductEdit&id=" . $radek->id);
 		array_push($radek->dg_commands, $command);
 */

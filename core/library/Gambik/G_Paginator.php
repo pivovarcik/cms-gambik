@@ -285,7 +285,11 @@ class G_Paginator {
 		} else
 		{
 
-			$url_start = AKT_PAGE . "?pg=";
+			$q = "?";
+			if (strpos(AKT_PAGE, "?")) {
+				$q = "&";
+			}
+			$url_start = AKT_PAGE . $q . "pg=";
 			$url_end = "";
 		}
 		//print $url_start;

@@ -17,5 +17,10 @@ class ProductVariantyListArgs extends ListArgs{
 		);
 		parent::__construct();
 
+
+		if (isset($_POST["doklad_id"])) {
+			$this->doklad_id = (int) $_POST["doklad_id"];
+		}
+
 	}
 }

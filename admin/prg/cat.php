@@ -34,10 +34,10 @@ $params = array(
 $script = tinyMceInit($params);
 $GHtml->setCokolivToHeader($script);
 
-$GHtml->setServerJs('/js/SWFUpload/swfupload/swfupload.js');
-$GHtml->setServerJs('/js/SWFUpload/js/swfupload.queue.js');
-$GHtml->setServerJs('/js/SWFUpload/js/fileprogress.js');
-$GHtml->setServerJs('/js/SWFUpload/js/handlers.js');
+$GHtml->setServerJs(URL_HOME_SITE .  "js/SWFUpload/swfupload/swfupload.js");
+$GHtml->setServerJs(URL_HOME_SITE . "/js/SWFUpload/js/swfupload.queue.js");
+$GHtml->setServerJs(URL_HOME_SITE . "/js/SWFUpload/js/fileprogress.js");
+$GHtml->setServerJs(URL_HOME_SITE . "/js/SWFUpload/js/handlers.js");
 
 
 $cokoliv = '<script type="text/javascript">
@@ -49,9 +49,9 @@ $(document).ready(function() {
 </script>';
 $GHtml->setCokolivToHeader($cokoliv);
 
-$GHtml->setServerJs("/js/jquery.treeview/lib/jquery.cookie.js");
-$GHtml->setServerJs("/js/jquery.treeview/jquery.treeview.js");
-$GHtml->setServerCss("/js/jquery.treeview/jquery.treeview.css");
+$GHtml->setServerJs(URL_HOME_SITE . "js/jquery.treeview/lib/jquery.cookie.js");
+$GHtml->setServerJs(URL_HOME_SITE . "js/jquery.treeview/jquery.treeview.js");
+$GHtml->setServerCss(URL_HOME_SITE . "js/jquery.treeview/jquery.treeview.css");
 
 $GHtml->printHtmlHeader();
 include PATH_TEMP . "admin_body_header.php";
@@ -121,8 +121,8 @@ $pageTabs = new CategoryTabs($form);	print $pageTabs->makeTabs();
 
 				<div class="treeBox">
 		<div id="treecontrol">
-			<a title="Collapse the entire tree below" href="#"><img src="/js/jquery.treeview/images/minus.gif" /> Sbalit vše</a>
-			<a title="Expand the entire tree below" href="#"><img src="/js/jquery.treeview/images/plus.gif" /> Rozbalit vše</a>
+			<a title="Collapse the entire tree below" href="#"><img src="<?php print URL_HOME_SITE; ?>js/jquery.treeview/images/minus.gif" /> Sbalit vše</a>
+			<a title="Expand the entire tree below" href="#"><img src="<?php print URL_HOME_SITE; ?>js/jquery.treeview/images/plus.gif" /> Rozbalit vše</a>
 		</div>
 		<div id="treedata" class="treeview2"></div>
 	</div>

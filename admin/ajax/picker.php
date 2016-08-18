@@ -14,6 +14,7 @@ if (!$GAuth->islogIn())
 } else {
 	define('LOGIN_STATUS', 'ON');
 }
+$data = array();
 if (isset($_GET["picker"])) {
 	$Picker = new $_GET["picker"];
 
@@ -60,7 +61,7 @@ if (isset($_GET["model"])) {
 }
 */
 $result = new stdClass();
-$result->hasresults = true;
+$result->hasresults = Count($data) > 0 ? true : false;
 $result->rows = $data;
 
 $json = json_encode($result);

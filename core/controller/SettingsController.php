@@ -186,4 +186,82 @@ class SettingsController extends G_Controller_Action
 			//$this->getRequest->clearPost();
 		}
 	}
+
+	public function saveAjaxAction(){
+		if($this->getRequest->isPost())
+		{
+
+
+			$model = new models_Settings();
+
+			$upload_form_name = "Application_Form_AdminSettings_LOGO_FILE";
+			if (isset($_FILES[$upload_form_name])) {
+				$FotoController = new FotoController();
+				if ($id = $FotoController->createFoto($upload_form_name)) {
+
+
+					$key = "LOGO_FILE_ID";
+					$data = array();
+					$data["value"] = $id;
+
+
+					$model->updateRecords($model->getTableName(), $data, "`key`='{$key}'");
+					//	print_r($_FILES);
+					//	exit;
+				}
+			}
+
+
+
+			$form = $this->formLoad('AdminSettings');
+			//	$postdata = $form->getValues();
+			//$postdata = $_POST;
+
+
+
+			$postdata = $form->getValues();
+			//	$model = new models_Eshop();
+			$settings = G_Setting::instance();
+
+			//	print_r($postdata);
+			//exit;
+			foreach ($this->setting as $key => $val) {
+
+				if (isset($postdata[$key])) {
+					$data = array();
+					$data["value"] = $postdata[$key];
+
+					if (!isset($_POST[$key])) {
+						//$data["value"] = 0;
+					}
+
+					if ($key == "LICENCE_KEY") {
+						//	if ($postdata[$key] != $settings->get("LICENCE_KEY")) {
+
+						if ($cmsExpireDate = $this->validLicenceKey($postdata[$key])) {
+
+							//		print $cmsExpireDate;
+							//	exit;
+							$model->updateRecords($model->getTableName(), array("value" => date("Y-m-d H:i:s",$cmsExpireDate)), "`key`='INSTALL_DATE'");
+						} else {
+							//	break;
+						}
+					}
+					//	}
+
+
+
+					$model->updateRecords($model->getTableName(), $data, "`key`='{$key}'");
+				}
+			}
+			$key = "WATERMARK_POS";
+			$data = array();
+			$data["value"] = $_POST[$key];
+
+
+			$model->updateRecords($model->getTableName(), $data, "`key`='{$key}'");
+
+			return true;
+		}
+	}
 }

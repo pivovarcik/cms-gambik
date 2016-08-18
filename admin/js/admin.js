@@ -2,7 +2,7 @@
 
 
 
-//var UrlBase = '/../admin';
+//var urlBase = '/../admin';
 function pridej_radek() {
 //var id = document.getElementById("id").value;
 var id = $("#counter").val() * 1;
@@ -222,7 +222,7 @@ function OPclose(id){
 function reloadPostFotogallery(id){
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + '/ajaxPostGallery.php',
+		url: urlBase + '/ajaxPostGallery.php',
 		dataType: 'html',
 		data: {
 			'post_id' : id,
@@ -243,7 +243,7 @@ function reloadPostFotogallery(id){
 function reloadGameFotogallery(id){
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + '/ajaxGameGallery.php',
+		url: urlBase + '/ajaxGameGallery.php',
 		dataType: 'html',
 		data: {
 			'game_id' : id,
@@ -264,7 +264,7 @@ function reloadGameFotogallery(id){
 function reloadFotogalery(id){
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + '/ajaxCatalogGallery.php',
+		url: urlBase + '/ajaxCatalogGallery.php',
 		dataType: 'html',
 		data: {
 			'catalog_id' : id,
@@ -284,7 +284,7 @@ function reloadFotogalery(id){
 function reloadLogo(id){
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + '/ajaxCatalogLogo.php',
+		url: urlBase + '/ajaxCatalogLogo.php',
 		dataType: 'html',
 		data: {
 			'catalog_id' : id,
@@ -303,7 +303,7 @@ function reloadLogo(id){
 function deleteFoto(foto_id,gallery_id,gallery_type){
 	$.ajax({
 	type: 'POST',
-	url: UrlBase + 'admin/ajax/delFoto.php',
+	url: urlBase + 'admin/ajax/delFoto.php',
 	dataType: 'json',
 	data: {
 	'delete_foto' : foto_id,
@@ -323,7 +323,7 @@ function deleteFoto(foto_id,gallery_id,gallery_type){
 function deleteFotoFromPost(foto_id, gallery_id){
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/delFoto.php',
+		url: urlBase + 'ajax/delFoto.php',
 		dataType: 'json',
 		data: {
 			'delete_foto' : foto_id,
@@ -343,7 +343,7 @@ function deleteFotoFromPost(foto_id, gallery_id){
 function setMainFoto(catalog_id, foto_id){
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/catalogSetMainFoto.php',
+		url: urlBase + 'ajax/catalogSetMainFoto.php',
 		dataType: 'json',
 		data: {
 			'catalog_id' : catalog_id,
@@ -390,7 +390,7 @@ function loadPhotoGallery(gallery_id, gallery_type){
 
 	$.ajax({
 	  	type: 'POST',
-		url: urlBase + '/admin/ajax/loadPhotoGallery.php',
+		url: urlBase + 'ajax/loadPhotoGallery.php',
 		dataType: 'json',
 		data: {
 			'id' : gallery_id,
@@ -451,7 +451,7 @@ function loadFilesGallery(gallery_id, gallery_type){
 
 	$.ajax({
 		type: 'POST',
-		url: urlBase + '/admin/ajax/loadFilesGallery.php',
+		url: urlBase + 'ajax/loadFilesGallery.php',
 		dataType: 'html',
 		data: {
 			'id' : gallery_id,
@@ -506,7 +506,7 @@ function deleteFilesGallery(file_id, gallery_id, gallery_type){
 	{
 		$.ajax({
 			type: 'POST',
-			url: UrlBase + 'admin/ajax/delFile.php',
+			url: urlBase + 'admin/ajax/delFile.php',
 			dataType: 'html',
 			data: {
 				'delete_file' : file_id,
@@ -530,7 +530,7 @@ function loadStatistikaObjednavekTab()
 	$('#statistikaObjednavekTab .fa-refresh').removeClass("fa-refresh").addClass("fa-spinner");
 	$.ajax({
 		type: "GET",
-		url: urlBase + "/admin/ajax/OrderStatsTab.php",
+		url: urlBase + "ajax/OrderStatsTab.php",
 		dataType: 'html',
 		data: {
 			'rand' : Math.random()
@@ -550,7 +550,7 @@ function loadUserActivityTab()
 	$('#userActivityTab .fa-refresh').removeClass("fa-refresh").addClass("fa-spinner");
 	$.ajax({
 		type: "GET",
-		url: urlBase +  "/admin/ajax/userActivityTab.php",
+		url: urlBase +  "ajax/userActivityTab.php",
 		dataType: 'html',
 		data: {
 			'rand' : Math.random()
@@ -574,7 +574,7 @@ function aresLoad(that)
 	var ico = $('#shipping_ico').val();
 	$.ajax({
 		type: "GET",
-		url: urlBase +  "/admin/ajax/ares.php",
+		url: urlBase +  "ajax/ares.php",
 		dataType: 'json',
 		data: {
 			'rand' : Math.random(),
@@ -602,7 +602,7 @@ function registerSortable()
 
             $.ajax({
 	            type: "POST",
-	            url: urlBase +  "/admin/ajax/sort_items.php",
+	            url: urlBase +  "ajax/sort_items.php",
 	            data: info,
 	            context: document.body,
 	            success: function(){
@@ -650,7 +650,7 @@ function loadCategoryPicker(type){
 //	showReloadDialog();
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/loadCategoryPicker.php?type=' + type,
+		url: urlBase + 'ajax/loadCategoryPicker.php?type=' + type,
 		dataType: 'html',
 		data: {
 			'selected' : selectedId,
@@ -685,7 +685,7 @@ function deleteFotoGallery(foto_id, gallery_id, gallery_type){
 	{
 		$.ajax({
 		  	type: 'POST',
-			url: UrlBase + 'admin/ajax/delFoto.php',
+			url: urlBase + 'ajax/delFoto.php',
 			dataType: 'json',
 			data: {
 				'delete_foto' : foto_id,
@@ -716,7 +716,7 @@ function deleteFotoGallery(foto_id, gallery_id, gallery_type){
 function setMainFoto2(foto_id, gallery_id, gallery_type){
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/setMainFoto.php',
+		url: urlBase + 'ajax/setMainFoto.php',
 		dataType: 'json',
 		data: {
 			'foto_id' : foto_id,
@@ -744,7 +744,7 @@ function setMainFoto2(foto_id, gallery_id, gallery_type){
 function getMainFoto(foto_id){
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/getMainFoto.php',
+		url: urlBase + 'ajax/getMainFoto.php',
 		dataType: 'html',
 		data: {
 			'foto_id' : foto_id,
@@ -773,7 +773,7 @@ function changePageLevel(page_id, position, page_type){
 	showReloadDialog();
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/changePageLevel.php',
+		url: urlBase + 'ajax/changePageLevel.php',
 		dataType: 'html',
 		data: {
 			'id' : page_id,
@@ -804,7 +804,7 @@ function loadTree(page_type){
 	showReloadDialog();
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/loadTree.php?type=' + page_type,
+		url: urlBase + 'ajax/loadTree.php?type=' + page_type,
 		dataType: 'html',
 		data: {
 			'rand' : Math.random()
@@ -837,7 +837,7 @@ function check_version(){
 	showReloadDialog();
 	$.ajax({
 		type: 'POST',
-		url: UrlBase + 'admin/ajax/check_version.php',
+		url: urlBase + 'ajax/check_version.php',
 		dataType: 'json',
 		data: {
 			'rand' : Math.random()
@@ -879,7 +879,7 @@ function upgrade_version(){
 	showReloadDialog();
 	$.ajax({
 		type: 'POST',
-		url:urlBase +  '/install/version.php',
+		url:urlBase +  'install/version.php',
 		dataType: 'html',
 		data: {
 			'rand' : Math.random()
@@ -904,7 +904,7 @@ function loadSysTree(){
 	showReloadDialog();
 	$.ajax({
 		type: 'POST',
-		url: UrlBase + 'admin/ajax/loadSysTree.php',
+		url: urlBase + 'ajax/loadSysTree.php',
 		dataType: 'html',
 		data: {
 			'rand' : Math.random()
@@ -937,7 +937,7 @@ function loadCiselnikTree(ciselnik){
 	showReloadDialog();
 	$.ajax({
 		type: 'GET',
-		url: UrlBase + 'admin/ajax/loadCiselnikTree.php',
+		url: urlBase + 'ajax/loadCiselnikTree.php',
 		dataType: 'html',
 		data: {
 			'ciselnik' : ciselnik,
@@ -1063,7 +1063,7 @@ function MsgLoad(){
 	var timeout = 180 * 1000;
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/msgcheck.php',
+		url: urlBase + 'admin/ajax/msgcheck.php',
 		dataType: 'json',
 		data: {
 			'rand' : Math.random()
@@ -1092,17 +1092,17 @@ function MsgLoad(){
 
 
 				}
-				//' + UrlBase + '/messages.php
-				var rhtml = '<a class="" href="' + UrlBase + 'admin/message">zprávy (' + r.count + ')</a>';
+				//' + urlBase + '/messages.php
+				var rhtml = '<a class="" href="' + urlBase + 'admin/message">zprávy (' + r.count + ')</a>';
 
 				//var rhtml = '<a class="select" href="javascript:showMSG();">zprávy (' + r.count + ')</a>';
 				rhtml +='<div id="msgresult" style="display:none;">';
-				rhtml +='<a href="' + UrlBase + '/add_message"><span>napsat zprávu</span></a>';
+				rhtml +='<a href="' + urlBase + '/add_message"><span>napsat zprávu</span></a>';
 				rhtml +='<ul>';
 				var len = r.msgs.length;
 				for (var i = 0; i < len; i++)
 			    {
-			    	rhtml +='<li><span class="nick"><a href="' + UrlBase + 'admin/user_detail?id='+r.msgs[i].id+'">' + r.msgs[i].nick + '</a>:</span><span>' + r.msgs[i].message + '</span></li>';
+			    	rhtml +='<li><span class="nick"><a href="' + urlBase + 'admin/user_detail?id='+r.msgs[i].id+'">' + r.msgs[i].nick + '</a>:</span><span>' + r.msgs[i].message + '</span></li>';
 			    }
 				rhtml +='</ul>';
 				rhtml +='</div>';
@@ -1149,7 +1149,7 @@ function aktualizujStavSortimentu(product_id){
 	$('#aktivni_'+product_id).html(statusText);
 	$.ajax({
 	  	type: 'POST',
-		url: UrlBase + 'admin/ajax/aktualizaceStavuSortimentu.php',
+		url: urlBase + 'admin/ajax/aktualizaceStavuSortimentu.php',
 		dataType: 'json',
 		data: {
 			'id' : product_id,

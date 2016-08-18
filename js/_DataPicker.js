@@ -25,8 +25,8 @@ function initAutocompletes() {
 	});
 }
 
-//[PV] Číselník
-	var URL_AUTOCOMPLETE = "/admin/ajax/picker.php";
+
+//var URL_AUTOCOMPLETE = UrlBase + "admin/ajax/picker.php";
 
 var townCache = {};
 
@@ -38,11 +38,8 @@ jQuery.fn.DataPicker = function(options) {
 			var term = request.term;
 
 			request.picker = $(element).siblings(".item_id").attr("data-picker");
-		/*	request.column = $(element).siblings(".item_id").attr("data-col");
-			request.label = $(element).siblings(".item_id").attr("data-label");
-			request.columnId = $(element).siblings(".item_id").attr("data-id");*/
 
-			lastXhr = $.getJSON(URL_AUTOCOMPLETE + "?",
+			lastXhr = $.getJSON(UrlBase + "admin/ajax/picker.php" + "?",
 			request,
 			function (data, status, xhr) {
 
@@ -78,14 +75,28 @@ jQuery.fn.DataPicker = function(options) {
 		},
 		delay: 500,
 		minLength: browserMsie()? 1 : 0
-	}).data("uiAutocomplete")._renderItem = function (ul, item)
+	});
+
+	/*.data("autocomplete") ? ._renderItem = function (ul, item)
 	{
 
 		return $("<li></li>")
 		.data("item.autocomplete", item)
 		.append($("<a></a>").html(item.value))
 		.appendTo(ul);
-	};
+	};*/
+
+	if (jQuery(this).autocomplete.data("autocomplete") != "undefined") {
+		jQuery(this).autocomplete.data("autocomplete")._renderItem = function (ul, item)
+		{
+
+			return $("<li></li>")
+			.data("item.autocomplete", item)
+			.append($("<a></a>").html(item.value))
+			.appendTo(ul);
+		};
+	}
+
 
 	jQuery(this).focus(function() {
 		if (!browserMsie()) {

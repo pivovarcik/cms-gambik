@@ -27,6 +27,7 @@ class PublishListArgs extends ListArgs{
 			$this->fulltext = $_GET["q"];
 		}
 
+	//	$this->all_public_date = true;
 
 		//$args->lang = LANG_TRANSLATOR;
 	}

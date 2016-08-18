@@ -78,6 +78,7 @@ $GHtml->setServerJs(URL_HOME_SITE . "js/tinymce/tinymce.min.js");
 
 //$GHtml->setServerJs("/js/colorbox/jquery.colorbox-min.js");
 $GHtml->setServerJs(URL_HOME_REL . "js/admin.js");
+$GHtml->setServerJs(URL_HOME_SITE . "js/DataPicker.js");
 $GHtml->setServerJs(URL_HOME_SITE . "js/DataGridProvider.js");
 
 $GHtml->setServerJs(URL_HOME_SITE . "js/fancybox/source/jquery.fancybox.js");

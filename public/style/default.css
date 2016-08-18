@@ -1,0 +1,49 @@
+html, body {
+	height: 100%;
+}
+
+
+body > #main {
+	height: auto;
+}
+#main {
+	height: 100%;
+	min-height: 100%;
+	position: relative;
+}
+
+img {
+	max-width: 100%;
+}
+
+#header_menu {
+	background: #000 none repeat scroll 0 0;
+}
+
+#header_menu, #header_menu a {
+	color:#fff;
+}
+.menu .sr-only2 {
+	float: left;
+	line-height: 1;
+	padding-left: 30px;
+	text-transform: uppercase;
+}
+#header_menu a:hover, #header_menu a.navSelected2, #header_menu a.navSelected,  #header_menu a:focus,
+	.nav .open > a, .nav .open > a:hover, .nav .open > a:focus
+{
+	color:#222;
+	background-color:#d2943d;
+}
+
+.navbar-toggle .icon-bar {
+	background: #fff none repeat scroll 0 0;
+}
+
+
+
+footer {
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+}

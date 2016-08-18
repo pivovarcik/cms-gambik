@@ -1,7 +1,8 @@
 <?php
 session_start();
-define('URL_HOME', "/admin/");   // pro Url
-define('URL_HOME_REL', "/admin/");   // pro Url
+//define('URL_HOME', "/admin/");   // pro Url
+//define('URL_HOME_REL', "/admin/");   // pro Url
+	define('ADMIN', 'YES');
 include dirname(__FILE__) . "/../../inc/init_spolecne.php";
 
 
@@ -13,6 +14,7 @@ if (!$GAuth->islogIn())
 	exit();
 } else {
 	define('LOGIN_STATUS', 'ON');
+
 }
 
 if (isset($_GET["model"])) {
