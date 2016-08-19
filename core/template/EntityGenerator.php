@@ -61,7 +61,8 @@ class EntityGenerator {
 		}
 		$TemplateClass = new $Template;
 		//print_r($TemplateClass->_attributtes);
-		$templateName = str_replace("Template", "" , $Template);
+		//$templateName = str_replace("Template", "" , $Template);
+		$templateName = substr($Template,0, strLen($Template) - strLen("Template"));
 		$templateName = str_replace("Entity", "" , $templateName);
 
 		$result = '<?php'."\n";

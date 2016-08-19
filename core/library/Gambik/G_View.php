@@ -106,6 +106,20 @@ class G_View
 
 
 
+		$name = $Obj->getName();
+		if ($this->anonymous === false) {
+			$formName = $Obj->getFormName();
+			if (!empty($formName)) {
+				//$key = $formName . "_" . $this->getName();
+				$name =  $Obj->getFormName() . "_" . $Obj->getName();
+			} else {
+				//$key = $this->getName();
+				$name =  $Obj->getName();
+			}
+
+		}
+
+
 		//	print_r($attribs);
 		if (is_array($input))
 		{
@@ -146,7 +160,7 @@ class G_View
 
 
 
-					$result .= '<input'.$attrib_string.' type="radio" name="' . $Obj->getName() . ' value="' . $value[0] . '"/>' . $this->eol;
+					$result .= '<input'.$attrib_string.' type="radio" name="' . $name . ' value="' . $value[0] . '"/>' . $this->eol;
 
 				} else {
 
@@ -156,9 +170,9 @@ class G_View
 					}
 
 					$result .= '<div class="radio">';
-					$result .= '<label for="' . $Obj->getName() . '' . $key . '">';
+					$result .= '<label for="' . $name . '' . $key . '">';
 					//$result .= '<input id="' . $Obj->getName() . '' . $key . '" name="' . $Obj->getName() . '"'.$attrib_string.' type="radio"' . $selected . ' value="' . $key . '"/><label for="' . $Obj->getName() . '' . $key . '">' . $value . '</label>' . $this->eol;
-					$result .= '<input id="' . $Obj->getName() . '' . $key . '" name="' . $Obj->getName() . '"'.$attrib_string.' type="radio"' . $selected . ' value="' . $key . '"/>' . $value . '' . $this->eol;
+					$result .= '<input id="' . $name . '' . $key . '" name="' . $name . '"'.$attrib_string.' type="radio"' . $selected . ' value="' . $key . '"/>' . $value . '' . $this->eol;
 					$result .= '</label>';
 					$result .= '</div>';
 
