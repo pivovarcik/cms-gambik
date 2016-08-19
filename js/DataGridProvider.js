@@ -343,7 +343,34 @@ $.extend(DataGridProvider.prototype, {
 				openModalForm(formId);
 
 				$("#myModal-form .datepicker").datepicker();
-				$("#myModal-form .combobox").DataPicker();
+			//	$("#myModal-form .combobox").DataPicker();
+
+
+				$("#myModal-form .combobox").each(function() {
+
+
+
+					if ($(this).hasClass('hasAutocomplete')) {
+						return;
+					}
+					$(this).addClass('hasAutocomplete');
+
+
+
+
+
+					$(this).DataPicker({
+
+						addButton: false
+					});
+
+					// zaregistrování události na klik .combo_select_button
+					var that = $(this);
+					$(this).siblings(".combo_select_button").click(function(){
+						$(that).trigger("focus");
+					});
+				});
+
 				// nastav submit
 				console.log("nastavuji submit");
 				$("#myModal-form").on( "submit",function(e){

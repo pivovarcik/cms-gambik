@@ -78,14 +78,28 @@ jQuery.fn.DataPicker = function(options) {
 		},
 		delay: 500,
 		minLength: browserMsie()? 1 : 0
-	}).data("uiAutocomplete")._renderItem = function (ul, item)
+	});
+
+	/*.data("autocomplete") ? ._renderItem = function (ul, item)
 	{
 
 		return $("<li></li>")
 		.data("item.autocomplete", item)
 		.append($("<a></a>").html(item.value))
 		.appendTo(ul);
+	};*/
+
+	if (jQuery(this).autocomplete.data("autocomplete") != "undefined") {
+		jQuery(this).autocomplete.data("autocomplete")._renderItem = function (ul, item)
+		{
+
+			return $("<li></li>")
+			.data("item.autocomplete", item)
+			.append($("<a></a>").html(item.value))
+			.appendTo(ul);
 	};
+	}
+
 
 	jQuery(this).focus(function() {
 		if (!browserMsie()) {
