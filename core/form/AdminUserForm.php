@@ -10,6 +10,7 @@ class AdminUserForm extends G_Form
 	{
 		parent::__construct();
 		$this->loadModel("models_Users");
+	//	$this->setStyle(BootstrapForm::getStyle());
 		//$this->init();
 	}
 

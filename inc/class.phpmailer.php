@@ -52,6 +52,7 @@ class PHPMailer {
    */
   public $Priority          = 3;
 
+public $exception_text = "";
   /**
    * Sets the CharSet of the message.
    * @var string
@@ -269,7 +270,7 @@ class PHPMailer {
   private   $sign_cert_file = "";
   private   $sign_key_file  = "";
   private   $sign_key_pass  = "";
-  private   $exceptions     = false;
+  private   $exceptions     = true	;
 
   /////////////////////////////////////////////////
   // CONSTANTS
@@ -519,7 +520,7 @@ class PHPMailer {
       if ($this->exceptions) {
         throw $e;
       }
-      echo $e->getMessage()."\n";
+      $this->exception_text = $e->getMessage();
       return false;
     }
   }

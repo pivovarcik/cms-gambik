@@ -60,6 +60,16 @@ class SaveEntity {
 		//$this->saveEntityList[$saveEntitaName] = $saveEntita;
 	}
 
+	/*
+	 * Přidá kolekce entit do ukládání
+	*/
+	public function addSaveEntities($saveEntitiesList = array())
+	{
+		foreach ($saveEntitiesList as $saveEntita) {
+			$this->addSaveEntity($saveEntita);
+		}
+	}
+
 	/**
 	 * Query spuštěné po uložení entit
 	 * */

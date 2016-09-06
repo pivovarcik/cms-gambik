@@ -521,7 +521,7 @@ class G_View
 			if ($Obj->viewType == 2) {
 				$result_checkbox = '<div class="checkbox">' . $result . '<label for="' . $Obj->Attributes["id"] . '">'  . $label . '</label></div>';
 			} else {
-				$result_checkbox = '<div class="checkbox">' . '<label for="' . $Obj->Attributes["id"] . '">' . $result . $label . '</label></div>';
+				$result_checkbox = '<div class="checkbox">' . '<label for="' . $Obj->Attributes["id"] . '">' . $result .'<span>' .  $label . '</span></label></div>';
 			}
 
 			return $result_checkbox;

@@ -11,6 +11,7 @@
 class MailingController extends G_Controller_Action
 {
 	public $total = 0;
+	public $exception_text = "";
 
 	private $from;
 	private $bcc;
@@ -334,6 +335,8 @@ class MailingController extends G_Controller_Action
 				if ($this->odeslatEmail($postdata["adresat_id"],$postdata["subject"],$postdata["description"])) {
 					$form->setResultSuccess("SMS zpráva byla odeslána.");
 					return true;
+				} else {
+					$form->setResultError($this->exception_text);
 				}
 
 
@@ -427,6 +430,8 @@ class MailingController extends G_Controller_Action
 			//	return $mail->send();
 			if ($mail->send()) {
 				return $this->createEmail($komu,$predmet,$zprava,$visit);
+			} else{
+				$this->exception_text = $mail->exception_text;
 			}
 		}
 		return false;

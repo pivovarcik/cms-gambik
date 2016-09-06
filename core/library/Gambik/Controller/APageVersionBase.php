@@ -26,6 +26,7 @@ abstract class APageVersionBase implements IPageVersion {
 	public static $modelVersion;
 	public static $isVersioning = false;
 	public static $getRequest;
+	public static $saveEntity = false;
 	private $pageSaveData = array();
 	private $pageVersionSaveData = array();
 	private $total = 0;
@@ -78,9 +79,92 @@ abstract class APageVersionBase implements IPageVersion {
 	{
 		return self::$model->getTableName();
 	}
+
+
+	private function setPageDataEntity($postdata, $originalData = null)
+	{
+		if (is_object($postdata)) {
+			$postdata = object_to_array($postdata);
+		}
+
+		$entityName = $this->pageEntity;
+
+		$Page = new $entityName($originalData->page_id,false);
+
+
+		if ( $originalData != null && isset($originalData->version)) {
+			$version = $originalData->version;
+		}
+
+		// Pozor při mazání záznamu se nemění verze!!!
+		// v případě verzování navýším verzi.
+		if (self::$isVersioning) {
+			$Page->version = + 1;
+		}
+		if ( $originalData != null && isset($originalData->id)) {
+			$page_id = $originalData->id;
+		}
+
+
+		// automat hledá v postdatech data vztažené k dané jazykové mutuci dle jazykového prefixu
+		foreach ($Page->getMetadata() as $attribut => $attributValue) {
+			$name = $attribut;
+
+			if (array_key_exists($name, $postdata)) {
+				$Page->$name = $postdata[$name];
+			}
+		}
+		/*
+		   $name = "pristup";
+		   if (array_key_exists($name, $postdata)) {
+		   $Page->$name = $postdata[$name];
+		   }
+
+		   $name = "foto_id";
+		   if (array_key_exists($name, $postdata) && !empty($postdata[$name])) {
+		   $Page->$name = $postdata[$name];
+		   }
+		*/
+
+
+		$name = 'user_id';
+		if (defined("USER_ID")) {
+			$Page->$name = USER_ID;
+		}
+		if ( $originalData != null && isset($originalData->$name)) {
+			$Page->$name = $originalData->$name;
+		}
+
+		/*	$name = 'category_id';
+
+		   // musí jít dát 0 jako nezařazené !
+		   // && $postdata[$name] > 0
+		   if (array_key_exists($name, $postdata)) {
+
+		   $Page->$name = $postdata[$name];
+		   if ($postdata[$name] == 0) {
+		   $Page->$name = NULL;
+		   }
+
+		   }*/
+
+
+		//	print_r($_POST);
+
+		$this->accessUsers = $postdata["user_assoc_id"];
+
+		//	print_r($Page->getChangedData());
+		//	exit;
+		return $Page;
+	}
 	// Nastavení version dat k uložení
 	protected function setPageData($postdata, $originalData = null)
 	{
+
+
+		if (self::$saveEntity) {
+			return $this->setPageDataEntity($postdata, $originalData);
+		}
 
 		if (is_object($postdata)) {
 			$postdata = object_to_array($postdata);
@@ -151,9 +235,159 @@ abstract class APageVersionBase implements IPageVersion {
 		return $data;
 	}
 
-	// Nastavení version dat k uložení
-	protected function setPageVersionData($postdata, $page_id, $version, $languageList = array())
+
+	private function setPageVersionDataEntity($postdata, $pageVersionList, $version, $languageList = array())
 	{
+
+		if (is_null($pageVersionList)) {
+			$pageVersionList = array();
+		}
+		if (count($languageList) == 0) {
+			$languageModel = new models_Language();
+			$languageList = $languageModel->getActiveLanguage();
+		}
+
+
+
+		if (is_object($postdata)) {
+			$postdata = object_to_array($postdata);
+		}
+
+		$this->tags_assoc = array();
+		$versionData = array();
+		// Verzování dle jazyků
+		$i = 0;
+		foreach ($languageList as $key => $val){
+
+
+			$entityName = $this->pageVersionEntity;
+			if (isset($pageVersionList[$val->code])) {
+				// existuje verze pro jazyk
+				$PageVersion = new $entityName($pageVersionList[$val->code]->id,false);
+			} else {
+				// zakládám novou
+				$PageVersion = new $entityName(null,false);
+			}
+
+			$PageVersion->lang_id = $val->id;
+			//	$PageVersion->page_id = $page_id;
+
+			if (defined("USER_ID")) {
+				$PageVersion->user_id = USER_ID;
+			}
+			$PageVersion->version = $version;
+
+
+
+
+			// automat hledá v postdatech data vztažené k dané jazykové mutuci dle jazykového prefixu
+			foreach ($PageVersion->getMetadata() as $attribut => $attributValue) {
+				$name = $attribut;
+
+				if ($name != "id") {
+
+
+					if (array_key_exists($name, $postdata)) {
+						$PageVersion->$name = $postdata[$name];
+					}
+
+					if (isset($postdata["{$name}_{$val->code}"])) {
+						$PageVersion->$name = $postdata["{$name}_{$val->code}"];
+					}
+				}
+			}
+
+			//exit;
+
+			// TODO Pozůstatek, tam kde není category_id
+			// && $postdata[$name] > 0
+			/*	$name = 'category';
+			   if (array_key_exists($name, $postdata)) {
+			   $PageVersion->category_id = $postdata[$name];
+			   }
+			   $name = 'category_id';
+			   // && $postdata[$name] > 0
+			   if (array_key_exists($name, $postdata)) {
+
+			   $PageVersion->category_id = $postdata[$name];
+			   //$data[$name] = $postdata[$name];
+			   if ($postdata[$name] == 0) {
+			   $PageVersion->category_id = NULL;
+			   }
+
+
+			   }
+			*/
+			/*
+			   $name = "title";
+			   if (isset($postdata["{$name}_{$val->code}"])) {
+			   $PageVersion->$name = $postdata["{$name}_{$val->code}"];
+			   }
+
+			   $name = "perex";
+			   if (isset($postdata["{$name}_{$val->code}"])) {
+			   $PageVersion->$name = $postdata["{$name}_{$val->code}"];
+			   }
+
+			   $name = "description";
+			   if (isset($postdata["{$name}_{$val->code}"])) {
+			   $PageVersion->$name = $postdata["{$name}_{$val->code}"];
+			   }
+
+			   $name = "pagetitle";
+			   if (isset($postdata["{$name}_{$val->code}"])) {
+			   $PageVersion->$name = $postdata["{$name}_{$val->code}"];
+			   }
+
+			   $name = "pagedescription";
+			   if (isset($postdata["{$name}_{$val->code}"])) {
+			   $PageVersion->$name = $postdata["{$name}_{$val->code}"];
+			   }
+
+			   $name = "pagekeywords";
+			   if (isset($postdata["{$name}_{$val->code}"])) {
+			   $PageVersion->$name = $postdata["{$name}_{$val->code}"];
+			   }
+			*/
+			$name = "tags";
+			if (isset($postdata["{$name}_{$val->code}"])) {
+				$PageVersion->$name = $postdata["{$name}_{$val->code}"];
+
+
+				$this->tags_assoc[$val->id] = explode(",",$PageVersion->$name);
+			}
+
+			$name = "url";
+			if (array_key_exists("{$name}_{$val->code}", $postdata) && !empty($postdata["{$name}_{$val->code}"])) {
+
+				if (!isUrl($postdata["{$name}_{$val->code}"])) {
+					$url = strToUrl($postdata["{$name}_{$val->code}"]);
+				} else {
+					$url = ($postdata["{$name}_{$val->code}"]);
+				}
+
+			} else {
+				$url = strToUrl($postdata["title_$val->code"]);
+			}
+
+			$PageVersion->$name = $this->checkDuplicityUrl($url, $val->code, $PageVersion->page_id);
+
+			array_push($versionData, $PageVersion);
+			$i++;
+		}
+
+		//	print_r($versionData);
+
+		//	exit;
+		return $versionData;
+	}
+	// Nastavení version dat k uložení
+	protected function setPageVersionData($postdata, $page_id = null, $version = 0, $languageList = array())
+	{
+
+		if (self::$saveEntity) {
+			return $this->setPageVersionDataEntity($postdata, $page_id, $version, $languageList);
+		}
 
 		if (is_object($postdata)) {
 			$postdata = object_to_array($postdata);
@@ -285,6 +519,32 @@ abstract class APageVersionBase implements IPageVersion {
 		return true;
 	}
 
+	// Akce před započetím ukládání v transakci
+	private function beforeSaveDataEntity($form = false)
+	{
+		//	print("beforeSaveData()" . "\n");
+
+		$entita = self::getPageSaveData();
+
+	//	print_r($entita);
+	//	exit;
+
+		$data = $entita->getChangedData();
+		if (isset($data["isDeleted"]) && $data["isDeleted"] == 1) {
+			// označení smazaného záznamu
+			if ($data["user_id"] != USER_ID) {
+				return false;
+			}
+		}
+
+		if ($this->akcePredUlozenim($form) === false) {
+			//$this->akcePredUlozenimSChybou();
+			$this->akcePredUlozenimSChybou();
+			return false;
+		}
+		return true;
+	}
+
 
 	private function beforeDeleteData($form = false)
 	{
@@ -327,7 +587,10 @@ abstract class APageVersionBase implements IPageVersion {
 		//return $this->akcePoUlozeni();
 
 		$all_query_ok = true;
+
 		$page_id = $this->pageSaveData["id"];
+
+
 		self::$model->deleteRecords(T_USERS_ACCESS_ASSOC, "page_id=".$page_id." and page_type='".self::$model->getTableName(). "'");
 		//	$model->getLastQuery();
 		//	$model->query($query);
@@ -377,6 +640,67 @@ abstract class APageVersionBase implements IPageVersion {
 			return false;
 		}
 		return $this->validaceMazanehoZaznamu();
+	}
+
+	private function afterSaveDataEntity($SaveEntity)
+	{
+		//	print("afterSaveData()" . "\n");
+		//return $this->akcePoUlozeni();
+		$this->pageSaveData = $SaveEntity->getSavedEntity($this->pageEntity);
+		$all_query_ok = true;
+
+		$page_id = $this->pageSaveData->id;
+
+
+		self::$model->deleteRecords(T_USERS_ACCESS_ASSOC, "page_id=".$page_id." and page_type='".self::$model->getTableName(). "'");
+		//	$model->getLastQuery();
+		//	$model->query($query);
+		self::$model->commit ? null : $all_query_ok = false;
+
+		$categoryId = $this->getAccessUsers();
+		if (isset($categoryId) && is_array($categoryId)) {
+
+
+			//	print_r($_POST["category_id"]);
+			foreach ($categoryId as $key => $value ){
+				$data2 = array();
+				$data2["page_id"] = $page_id;
+				$data2["page_type"] = self::$model->getTableName();
+				$data2["user_id"] = $value;
+
+				//	print_r($data2);
+				self::$model->insertRecords(T_USERS_ACCESS_ASSOC, $data2);
+
+				self::$model->commit ? null : $all_query_ok = false;
+			}
+		}
+
+		// asociace značek
+		self::$model->deleteRecords(T_TAGS_ASSOC, "page_id=".$page_id." and page_type='".self::$model->getTableName(). "'");
+
+
+		foreach ($this->tags_assoc as $lang_id => $tagy )
+		{
+			//	print $lang_id;
+			for ($i=0;$i<count($tagy);$i++)
+			{
+				$tag = trim($tagy[$i]);
+				if (!empty($tag)) {
+					// zjistím jestli je tag založen v db
+					$tag_id = $this->getTagId($tag, $lang_id);
+					self::$model->insertRecords(T_TAGS_ASSOC,array("page_id" => $page_id, "tag_id" => $tag_id, "page_type" => self::$model->getTableName()));
+				}
+				//	print $tagy[$i];
+			}
+		}
+		//	print_r($this->tags_assoc);
+		//	exit;
+
+
+		if ($this->akcePoUlozeni() === false) {
+			return false;
+		}
+	//	return $this->validaceMazanehoZaznamu();
 	}
 
 	private function getTagId($tag, $lang_id){
@@ -525,6 +849,65 @@ abstract class APageVersionBase implements IPageVersion {
 	// Provede zápis do DB
 	protected function saveData($pageSaveData, $pageVersionSaveData, $form = false)
 	{
+		if (self::$saveEntity) {
+
+		//	print_r($pageSaveData);
+		//	exit;
+			$this->pageSaveData = $pageSaveData;
+			$this->pageVersionSaveData = $pageVersionSaveData;
+
+			if (self::beforeSaveDataEntity($form) === false) {
+				return false;
+			}
+
+			$SaveEntity = new SaveEntity();
+			$SaveEntity->addSaveEntity($pageSaveData);
+			$SaveEntity->addSaveEntities($pageVersionSaveData);
+
+			/*	foreach ($SaveEntity->getSaveEntity() as $Entity) {
+
+			   //	print_r($Entity->getChangedData());
+		 print "<pre>";
+			   if (is_array($Entity)) {
+			   foreach ($Entity as $key2 => $entita2)
+			   {
+
+			   print_r($entita2->getChangedData());
+			   //	print "id:" . $entita2->getId();
+			   }
+
+			   } else {
+			   //	print "id:" . $Entity->getId();
+			   print_r($Entity->getChangedData());
+			   }
+
+
+			   //	print_r($Entity);
+			   print "</pre>";
+			   //	exit;
+			   }
+			   //	print_r($SaveEntity->getSaveEntity());
+			   exit;*/
+
+			$saveResponse = $SaveEntity->save();
+
+
+			if ($saveResponse) {
+				//	print "tudy";
+				if (self::afterSaveDataEntity($SaveEntity) === false) {
+					//	print "chyba";
+					return false;
+				}
+				return true;
+				//self::afterSaveData() ? null : $all_query_ok = false;
+			} else {
+				self::afterSaveDataWithError();
+				return false;
+
+			}
+
+		}
+
 		$this->pageSaveData = $pageSaveData;
 		$this->pageVersionSaveData = $pageVersionSaveData;
 

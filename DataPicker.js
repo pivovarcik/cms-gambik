@@ -26,7 +26,7 @@ function initAutocompletes() {
 }
 
 //[PV] Číselník
-	var URL_AUTOCOMPLETE = urlBase + "ajax/picker.php";
+	var URL_AUTOCOMPLETE = "/admin/ajax/picker.php";
 
 var townCache = {};
 
@@ -78,29 +78,14 @@ jQuery.fn.DataPicker = function(options) {
 		},
 		delay: 500,
 		minLength: browserMsie()? 1 : 0
-	});
-
-	/*.data("autocomplete") ? ._renderItem = function (ul, item)
+	}).data("uiAutocomplete")._renderItem = function (ul, item)
 	{
 
 		return $("<li></li>")
 		.data("item.autocomplete", item)
 		.append($("<a></a>").html(item.value))
 		.appendTo(ul);
-	};*/
-/*
-	console.log(jQuery(this).autocomplete.data);
-	if (jQuery(this).autocomplete.data != "undefined" && jQuery(this).autocomplete.data("autocomplete") != "undefined") {
-		jQuery(this).autocomplete.data("autocomplete")._renderItem = function (ul, item)
-		{
-
-			return $("<li></li>")
-			.data("item.autocomplete", item)
-			.append($("<a></a>").html(item.value))
-			.appendTo(ul);
 	};
-	}
-*/
 
 	jQuery(this).focus(function() {
 		if (!browserMsie()) {

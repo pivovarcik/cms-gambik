@@ -49,7 +49,7 @@ $GHtml->printHtmlHeader();
 include PATH_TEMP . "admin_body_header.php";
 ?>
 
-	<form class="standard_form" method="post">
+	<form class="" method="post">
 
 
 <div class="page-header">
@@ -76,9 +76,22 @@ include PATH_TEMP . "admin_body_header.php";
 <?php print $form->Result();?>
 </div>
 
+<div class="row">
+	<div class="col-lg-12">
+		<div class="col-lg-8">
+
+
+
+	<div id="tabs-nested-left2">
+
 <?php
 $pageTabs = new CategoryTabs($form);	print $pageTabs->makeTabs();
 ?>
+</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div id="productfotoMain"></div>
 
 	<div class="treeBox">
 		<div id="treecontrol">
@@ -87,7 +100,12 @@ $pageTabs = new CategoryTabs($form);	print $pageTabs->makeTabs();
 		</div>
 		<div id="treedata" class="treeview2"></div>
 	</div>
-	<div id="productfotoMain"></div>
+
+
+			</div>
+	</div>
+</div>
+
 </form>
 
 

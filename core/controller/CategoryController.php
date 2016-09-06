@@ -18,6 +18,7 @@ class CategoryController extends PageVersionBase
 		$settings = G_Setting::instance();
 		$isVersioning = ($settings->get("VERSION_CATEGORY") == 1) ? true : false;
 		self::$isVersioning = $isVersioning;
+		self::$saveEntity = true;
 	}
 
 	/**
@@ -36,12 +37,12 @@ class CategoryController extends PageVersionBase
 
 				$postdata = $form->getValues();
 
-				$pageSaveData = self::setPageData($postdata);
-				$pageVersionSaveData = self::setPageVersionData($postdata, $pageSaveData["id"], $pageSaveData["version"]);
+				$PageEntity = self::setPageData($postdata);
+				$pageVersionEntities = self::setPageVersionData($postdata);
 
-				$pageSaveData["level"] = self::$model->getMinLevelCategory($pageSaveData["category_id"]) - 1;
+				$PageEntity->level = self::$model->getMinLevelCategory($PageEntity->category_id) - 1;
 
-				if (self::saveData($pageSaveData, $pageVersionSaveData, $form)) {
+				if (self::saveData($PageEntity, $pageVersionEntities, $form)) {
 					$form->setResultSuccess("Rubrika byla přidána.");
 					self::$getRequest->goBackRef();
 				}
@@ -66,16 +67,14 @@ class CategoryController extends PageVersionBase
 			if ($form->isValid(self::$getRequest->getPost()))
 			{
 
-			//	print_r($_POST);
+
 				$postdata = $form->getValues();
 
-			//	print_r($postdata);
-			//	exit;
-				$pageSaveData = self::setPageData($postdata, $form->page);
-				$pageSaveData["id"] = $form->page->id;
-				$pageVersionSaveData = self::setPageVersionData($postdata, $pageSaveData["id"], $pageSaveData["version"]);
+				$PageEntity = self::setPageData($postdata, $form->page);
 
-				if (self::saveData($pageSaveData, $pageVersionSaveData, $form)) {
+				$pageVersionEntities = self::setPageVersionData($postdata, $form->page->versionList, $PageEntity->version);
+
+				if (self::saveData($PageEntity, $pageVersionEntities, $form)) {
 					$form->setResultSuccess("Rubrika byla aktualizována.");
 					self::$getRequest->goBackRef();
 				}
@@ -112,7 +111,7 @@ class CategoryController extends PageVersionBase
 		}
 
 	}
-	public function setPageData($postdata, $originalData = null)
+/*	public function setPageData($postdata, $originalData = null)
 	{
 		$data = parent::setPageData($postdata, $originalData);
 
@@ -135,45 +134,38 @@ class CategoryController extends PageVersionBase
 		//print_r($data);
 		//exit;
 		return $data;
-	}
-
-	public function setPageVersionData($postdata, $page_id, $version)
+	}*/
+/*
+	public function setPageVersionData($postdata, $pageVersionList, $version)
 	{
 
 		$languageModel = new models_Language();
 		$languageList = $languageModel->getActiveLanguage();
 
-		$versionData = parent::setPageVersionData($postdata, $page_id, $version, $languageList);
-		/*
-		// uživatelský kod
-		$i = 0;
-		foreach ($languageList as $key => $val)
-		{
-			$name = "category_id";
-			if (array_key_exists($name, $postdata) && !empty($postdata[$name])) {
-				$versionData[$i][$name] = $postdata[$name];
-			}
-			$i++;
-		}*/
-		return $versionData;
+		$versionEntityList = parent::setPageVersionData($postdata, $pageVersionList, $version, $languageList);
+		return $versionEntityList;
 	}
-
+*/
 	private function validacePredUlozenim()
 	{
 
 		$data = self::getPageSaveData();
 
-		if (isset($data["category_id"])) {
 
 
-			if ($data["category_id"] == $data["id"]) {
+		//if (isset($data->category_id)) {
+
+
+		//	print_r($data);
+		//	exit;
+			if ($data->category_id == $data->id) {
 				$this->setResultError("Nelze vybrat jako umístění sám sebe!");
 				return false;
 			}
-			$categoryParent = self::$model->getDetailById($data["category_id"]);
+			$categoryParent = self::$model->getDetailById($data->category_id);
 
 			//print_r($categoryParent);
-			if (strpos($categoryParent->serial_cat_id . "|", "|" . $data["id"] . "|" )) {
+			if (strpos($categoryParent->serial_cat_id . "|", "|" . $data->id . "|" )) {
 				$this->setResultError("Nelze vybrat jako umístění kategorii, která je vně této rubriky!");
 				return false;
 			}
@@ -190,7 +182,7 @@ class CategoryController extends PageVersionBase
 			// validace zda category není náhodou potomkem
 
 
-		}
+	//	}
 		return true;
 	}
 

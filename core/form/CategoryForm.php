@@ -10,6 +10,7 @@ abstract class CategoryForm extends PageForm
 	function __construct($model)
 	{
 		parent::__construct($model);
+		$this->setStyle(BootstrapForm::getStyle());
 	}
 
 

@@ -67,8 +67,8 @@ abstract class MailForm extends G_Form
 		//	$elem->setAttribs("class","combobox");
 		$elem->setAttribs('label','Adresát');
 		$elem->setAttribs('data-picker','UserEmailPicker');
-	//	$elem->setAttribs('data-col',$nameAlias);
-	//	$elem->setAttribs('data-id',$nameAlias);
+		$elem->setAttribs('data-col',$nameAlias);
+		$elem->setAttribs('data-id',$nameAlias);
 		$this->addElement($elem);
 
 		/*

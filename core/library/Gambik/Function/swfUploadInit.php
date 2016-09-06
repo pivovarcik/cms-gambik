@@ -110,8 +110,8 @@ class PageFileUploaderAdapter extends SWFUploadAdapter {
 class SWFUploadAdapter {
 
 	protected $instanceId;
-	protected $flash_url = URL_HOME_SITE . "js/SWFUpload/swfupload/swfupload.swf";
-	protected $upload_url = URL_HOME_SITE . "admin/upload.php";
+	protected $flash_url =  null;
+	protected $upload_url = null;
 	protected $file_types_allowed = "*.*";
 	protected $file_types_description = "All Files";
 	protected $file_size_limit = "100";
@@ -124,6 +124,10 @@ class SWFUploadAdapter {
 	protected $postParams = array();
 
 	function __construct(){
+
+		$this->flash_url = URL_HOME_SITE . "js/SWFUpload/swfupload/swfupload.swf";
+		$this->upload_url = URL_HOME_SITE . "admin/upload.php";
+
 		$this->file_types_allowed = AllowedExtensionHelper::get(DefaultSetting::get("DATA_EXTENSION_WHITELIST"));
 		$this->instanceId = rand();
 	}

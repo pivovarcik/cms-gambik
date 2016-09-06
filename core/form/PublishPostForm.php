@@ -11,6 +11,7 @@ class PublishPostForm extends PageForm
 	{
 		// Typ Page
 		parent::__construct("models_Publish");
+		$this->setStyle(BootstrapForm::getStyle());
 	//	$this->init();
 	}
 	public function loadElements()

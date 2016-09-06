@@ -45,7 +45,7 @@ class models_Users extends models_Pages{
 
 	public function getUserByKeyLostPassword($key)
 	{
-		return $this->getUser("t1.lost_pwd='" . $key . "' and isDeleted=0");
+		return $this->getUser("t1.lost_pwd='" . $key . "' and t1.isDeleted=0");
 	}
 
 	public function setUserById($data, $id)
@@ -228,7 +228,7 @@ class models_Users extends models_Pages{
 
 		for ($i=0;$i < count($list);$i++)
 		{
-			$list[$i]->link_edit = '/admin/user_detail?id=' .$list[$i]->id;
+			$list[$i]->link_edit = URL_HOME . 'user_detail?id=' .$list[$i]->id;
 		}
 		//print $this->last_query;
 		return $list;

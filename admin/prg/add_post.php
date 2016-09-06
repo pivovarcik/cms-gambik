@@ -50,7 +50,7 @@ $GHtml->printHtmlHeader();
 include PATH_TEMP . "admin_body_header.php";
 ?>
 
-<form class="standard_form" method="post">
+<form class="" method="post">
 
 <div class="page-header">
 <h1><?php echo $pagetitle; ?>
@@ -85,11 +85,22 @@ print $form->Result();
 
 </div>
 
+<div class="row">
+	<div class="col-lg-12">
+		<div class="col-lg-8">
+
 <?php
 $pageTabs = new PublishTabs($form);
 print $pageTabs->makeTabs($tabs);
 ?>
 
+		</div>
+
+
+		<div class="col-lg-4">
+			<div id="productfotoMain"></div>
+		</div>
+	</div>
     </form>
 
 <?php

@@ -376,8 +376,11 @@ $.extend(DataGridProvider.prototype, {
 				$("#myModal-form").on( "submit",function(e){
 					e.preventDefault();
 
+
+
 					if (!blockFormmyModal){
 
+						$("#myModal-submit").attr("disabled","disabled");
 						var url = $("#myModal-form").attr("action");
 						o.saveData(url);
 					}

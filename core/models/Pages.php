@@ -57,9 +57,10 @@ abstract class models_Pages extends G_Service
 	protected function getPage($list = array())
 	{
 		$obj = new stdClass();
+		$versionList = array();
 		if (count($list) > 0) {
 			$obj = $list[0];
-			$obj->id = isset($list[0]->page_id) ? $list[0]->page_id : $list[0]->id;
+		//	$obj->id = isset($list[0]->page_id) ? $list[0]->page_id : $list[0]->id;
 			$obj->version = isset($list[0]->version) ? $list[0]->version : 0;
 			$obj->level = isset($list[0]->level) ? $list[0]->level : 0;
 			$obj->TimeStamp = $list[0]->TimeStamp;
@@ -82,7 +83,7 @@ abstract class models_Pages extends G_Service
 			$obj->pristup = isset($list[0]->pristup) ? $list[0]->pristup : null;
 			for($i=0;$i<count($list);$i++)
 			{
-
+				$versionList[$list[$i]->code] = $list[$i];
 				if ($list[$i]->code == LANG_TRANSLATOR)
 				{
 					$title = "title";
@@ -168,6 +169,7 @@ abstract class models_Pages extends G_Service
 
 			}
 		}
+		$obj->versionList = $versionList;
 		return $obj;
 	}
 

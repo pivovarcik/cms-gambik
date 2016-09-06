@@ -13,7 +13,7 @@ $GHtml->setPagedescription($pagedescription);
 $GHtml->printHtmlHeader();
 include PATH_TEMP . "admin_body_header.php";
 ?>
-	<form class="standard_form" method="post">
+	<form class="" method="post">
 <div class="page-header">
 <h1><?php echo $pagetitle; ?></h1>
 <?php
