@@ -1,5 +1,0 @@
-User-agent: *
-Robot-version:2.0
-Disallow:
-Request-rate: 30/1m 1500-0559
-Sitemap: http://www.bozako.cz/sitemap.xml
